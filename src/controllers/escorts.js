@@ -46,7 +46,7 @@ const reActive = catchAsync(async (req,res,next)=>{
 });
 
 const getQuery = catchAsync(async (req,res,next)=>{
-    const { confirmation } = req.params;
+    const { confirmation } = req.query;
 
     const data = await Escorts.findAll({
         where: {
