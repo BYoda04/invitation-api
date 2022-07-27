@@ -89,7 +89,7 @@ const getQuery = catchAsync(async (req,res,next)=>{
             model: Escorts,
             required: false,
             where: {
-                status: 'active'
+                confirmation
             },
         }
     });
