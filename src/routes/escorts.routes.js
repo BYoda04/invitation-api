@@ -1,7 +1,7 @@
 const express = require('express');
 
 //controllers
-const { create, reActive, deleted } = require('../controllers/escorts');
+const { create, reActive, deleted, getQuery } = require('../controllers/escorts');
 
 //validators
 
@@ -17,5 +17,6 @@ const escortsRouter = express.Router();
 escortsRouter.post("/create/:id", guestExists,create);
 escortsRouter.patch("/update/:id", escortExists,reActive);
 escortsRouter.delete("/delete/:id", escortExists,deleted);
+escortsRouter.get("/get/query",getQuery);
 
 module.exports = { escortsRouter };

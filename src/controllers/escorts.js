@@ -45,8 +45,28 @@ const reActive = catchAsync(async (req,res,next)=>{
     });
 });
 
+const getQuery = catchAsync(async (req,res,next)=>{
+    const { confirmation } = req.params;
+
+    const data = await Escorts.findAll({
+        where: {
+            confirmation
+        }
+    });
+
+    if (!data.length) {
+        return next(new AppError('Not guests exists',404));
+    };
+
+    res.status(200).json({
+        status: 'success',
+        data
+    });
+});
+
 module.exports = {
     create,
     deleted,
     reActive,
+    getQuery,
 };

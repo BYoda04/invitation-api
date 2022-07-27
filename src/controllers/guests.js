@@ -78,10 +78,37 @@ const getMe = catchAsync(async (req,res,next)=>{
     });
 });
 
+const getQuery = catchAsync(async (req,res,next)=>{
+    const { confirmation } = req.params;
+
+    const data = await Guests.findAll({
+        where: {
+            confirmation
+        },
+        include: {
+            model: Escorts,
+            required: false,
+            where: {
+                status: 'active'
+            },
+        }
+    });
+
+    if (!data.length) {
+        return next(new AppError('Not guests exists',404));
+    };
+
+    res.status(200).json({
+        status: 'success',
+        data
+    });
+});
+
 module.exports = {
     create,
     deleted,
     confirmate,
     getAll,
     getMe,
+    getQuery,
 };
